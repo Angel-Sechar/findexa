@@ -720,31 +720,31 @@ TASK 5 — API Routes
   [x] Verify: all routes return correct shapes
 
 TASK 6 — Onboarding
-  [ ] Create src/components/OnboardingStep.tsx
-  [ ] Create src/app/onboarding/page.tsx (all 5 steps)
-  [ ] Selects for typeId load from GET /api/constants
-  [ ] Verify: complete flow sends POST /api/snapshot and redirects to /reveal
+  [x] Create src/components/OnboardingStep.tsx
+  [x] Create src/app/onboarding/page.tsx (all 5 steps)
+  [x] Selects for typeId load from GET /api/constants
+  [x] Verify: complete flow sends POST /api/snapshot and redirects to /reveal
 
 TASK 7 — Reveal Screen
-  [ ] Create src/app/reveal/page.tsx
-  [ ] Implement count-up animation (requestAnimationFrame)
-  [ ] Verify: shows correct index, redirects to /dashboard if already seen
+  [x] Create src/app/reveal/page.tsx
+  [x] Implement count-up animation (requestAnimationFrame)
+  [x] Verify: shows correct index, redirects to /dashboard if already seen
 
 TASK 8 — Dashboard
-  [ ] Create src/components/FreedomIndex.tsx
-  [ ] Create src/components/BalanceSheet.tsx
-  [ ] Create src/components/AssetsList.tsx
-  [ ] Create src/components/LiabilitiesList.tsx
-  [ ] Create src/components/DashboardTabs.tsx
-  [ ] Create src/components/CoachInsight.tsx (placeholder if no AI provider)
-  [ ] Create src/app/dashboard/page.tsx
-  [ ] Verify: type labels rendered from constant table, not hardcoded
-  [ ] Verify: all data displays correctly at 375px
+  [x] Create src/components/FreedomIndex.tsx
+  [x] Create src/components/BalanceSheet.tsx
+  [x] Create src/components/AssetsList.tsx
+  [x] Create src/components/LiabilitiesList.tsx
+  [x] Create src/components/DashboardTabs.tsx
+  [x] Create src/components/CoachInsight.tsx (placeholder there's no AI provider yet)
+  [x] Create src/app/dashboard/page.tsx
+  [x] Verify: type labels rendered from constant table, not hardcoded
+  [x] Verify: all data displays correctly at 375px
 
 TASK 9 — PWA
-  [ ] Create public/manifest.json
-  [ ] Add icon-192.png and icon-512.png to public/icons/
-  [ ] Configure next.config.ts with next-pwa
+  [x] Create public/manifest.json
+  [x] Add icon-192.png and icon-512.png to public/icons/
+  [x] Configure next.config.ts with next-pwa
   [ ] Verify: installable on Android Chrome
   [ ] Verify: installable on iOS Safari
 
