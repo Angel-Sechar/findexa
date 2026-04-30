@@ -692,32 +692,32 @@ TASK 1 — Types & Utilities
   [x] Verify: TypeScript compiles with zero errors
 
 TASK 2 — Supabase Client
-  [ ] Create src/lib/supabase/client.ts (browser client)
-  [ ] Create src/lib/supabase/server.ts (server client)
-  [ ] Verify: clients initialize without errors
+  [x] Create src/lib/supabase/client.ts (browser client)
+  [x] Create src/lib/supabase/server.ts (server client)
+  [x] Verify: clients initialize without errors
 
 TASK 3 — Auth & Middleware
-  [ ] Create src/middleware.ts (route protection per table above)
-  [ ] Create src/app/(auth)/register/page.tsx
-  [ ] Create src/app/(auth)/login/page.tsx
-  [ ] Create src/app/api/auth/callback/route.ts
-  [ ] Verify: register → redirect to /onboarding
-  [ ] Verify: authenticated user visiting / → redirect to /dashboard
+  [x] Create src/middleware.ts (route protection per table above)
+  [x] Create src/app/auth/register/page.tsx
+  [x] Create src/app/auth/login/page.tsx
+  [x] Create src/app/api/auth/callback/route.ts
+  [x] Verify: register → redirect to /onboarding
+  [x] Verify: authenticated user visiting / → redirect to /dashboard
 
 TASK 4 — UI Components
-  [ ] Create src/components/ui/Button.tsx
-  [ ] Create src/components/ui/Input.tsx
-  [ ] Create src/components/ui/Card.tsx
-  [ ] Create src/components/ui/ProgressBar.tsx
-  [ ] Verify: renders correctly at 375px viewport
+  [x] Create src/components/ui/Button.tsx
+  [x] Create src/components/ui/Input.tsx
+  [x] Create src/components/ui/Card.tsx
+  [x] Create src/components/ui/ProgressBar.tsx
+  [x] Verify: renders correctly at 375px viewport
 
 TASK 5 — API Routes
-  [ ] Create src/app/api/constants/route.ts (GET)
-  [ ] Create src/app/api/snapshot/route.ts (GET + POST)
-  [ ] Create src/app/api/assets/route.ts (POST + DELETE)
-  [ ] Create src/app/api/liabilities/route.ts (POST + DELETE)
-  [ ] Create src/app/api/coach/route.ts (POST — placeholder only)
-  [ ] Verify: all routes return correct shapes
+  [x] Create src/app/api/constants/route.ts (GET)
+  [x] Create src/app/api/snapshot/route.ts (GET + POST)
+  [x] Create src/app/api/assets/route.ts (POST + DELETE)
+  [x] Create src/app/api/liabilities/route.ts (POST + DELETE)
+  [x] Create src/app/api/coach/route.ts (POST — placeholder only)
+  [x] Verify: all routes return correct shapes
 
 TASK 6 — Onboarding
   [ ] Create src/components/OnboardingStep.tsx
@@ -792,4 +792,3 @@ _Architecture: Next.js full stack — simple structure_
 _Deploy: Vercel (free)_
 _Date: April 2026_
 _For AI agents — implement exactly as specified_
-
