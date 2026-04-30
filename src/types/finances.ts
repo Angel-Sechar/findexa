@@ -1,7 +1,5 @@
-export type ConstantCategoryId = 100 | 101 | 102 | 103 | 104;
-
 export interface Constant {
-  id: ConstantCategoryId;
+  id: number;
   value: number;
   label: string;
   shortened: string | null;
