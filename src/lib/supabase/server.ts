@@ -30,7 +30,7 @@ export async function createClient(): Promise<SupabaseClient> {
             },
           );
         } catch {
-          // Ignore in contexts where setting cookies is not available.
+          
         }
       },
     },

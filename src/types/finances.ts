@@ -9,6 +9,7 @@ export interface UserProfile {
   id: string;
   email: string;
   name: string;
+  lastName: string;
   countryId: number;
   currencyId: number;
   onboardingCompleted: boolean;

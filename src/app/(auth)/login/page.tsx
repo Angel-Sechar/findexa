@@ -17,10 +17,9 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setError(null);
-    setIsSubmitting(true);
+  const onSubmit = async () => {
+  setError(null);
+  setIsSubmitting(true);
 
     const { data, error: signInError } = await supabase.auth.signInWithPassword({
       email,
@@ -58,7 +57,7 @@ export default function LoginPage() {
     <main className="mx-auto flex min-h-screen w-full max-w-md items-center px-6 py-10">
       <section className="w-full rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
         <h1 className="text-2xl font-semibold text-slate-900">Iniciar sesion</h1>
-        <p className="mt-2 text-sm text-slate-600">Volve a tu balance y segui construyendo libertad.</p>
+        <p className="mt-2 text-sm text-slate-600">Vuelve a tu balance y sigue construyendo tu libertad financiera.</p>
 
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div>
@@ -77,7 +76,7 @@ export default function LoginPage() {
 
           <div>
             <label htmlFor="password" className="mb-1 block text-sm font-medium text-slate-700">
-              Contrasena
+              Contraseña
             </label>
             <input
               id="password"

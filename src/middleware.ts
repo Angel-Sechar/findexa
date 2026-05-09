@@ -1,7 +1,7 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_ONLY_ROUTES = new Set<string>(["/", "/login", "/register"]);
+const PUBLIC_ONLY_ROUTES = new Set<string>(["/", "/(auth)/login", "/(auth)/register"]);
 const PROTECTED_ROUTES = ["/onboarding", "/reveal", "/dashboard"];
 
 function isProtectedRoute(pathname: string): boolean {

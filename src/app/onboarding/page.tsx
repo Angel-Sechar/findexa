@@ -59,7 +59,7 @@ export default function OnboardingPage() {
 
       if (!response || !response.ok) {
         if (!cancelled) {
-          setLoadError("No pudimos cargar los tipos. Reintentá en unos segundos.");
+          setLoadError("No pudimos cargar los tipos. Reintentar en unos segundos.");
           setIsLoadingConstants(false);
         }
         return;

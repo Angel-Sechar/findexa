@@ -2,19 +2,21 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function RegisterPage() {
   const router = useRouter();
   const supabase = createClient();
   const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
 
@@ -28,6 +30,11 @@ export default function RegisterPage() {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setError("Las contraseñas no coinciden.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const { error: signUpError } = await supabase.auth.signUp({
@@ -36,6 +43,7 @@ export default function RegisterPage() {
       options: {
         data: {
           name: name.trim(),
+          last_name: lastName.trim(),
         },
       },
     });
@@ -54,7 +62,7 @@ export default function RegisterPage() {
     <main className="mx-auto flex min-h-screen w-full max-w-md items-center px-6 py-10">
       <section className="w-full rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
         <h1 className="text-2xl font-semibold text-slate-900">Crear cuenta</h1>
-        <p className="mt-2 text-sm text-slate-600">Comenza hoy a calcular tu libertad financiera.</p>
+        <p className="mt-2 text-sm text-slate-600">Comienza hoy a calcular tu libertad financiera.</p>
 
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div>
@@ -71,7 +79,20 @@ export default function RegisterPage() {
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none ring-teal-600 transition focus:ring-2"
             />
           </div>
-
+          <div>
+            <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-slate-700">
+              Apellido
+            </label>
+            <input
+              id="lastName"
+              type="text"
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+              required
+              minLength={2}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none ring-teal-600 transition focus:ring-2"
+            />
+          </div>
           <div>
             <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-700">
               Correo
@@ -88,13 +109,28 @@ export default function RegisterPage() {
 
           <div>
             <label htmlFor="password" className="mb-1 block text-sm font-medium text-slate-700">
-              Contrasena
+              Contraseña
             </label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              required
+              minLength={8}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none ring-teal-600 transition focus:ring-2"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="confirmPassword" className="mb-1 block text-sm font-medium text-slate-700">
+              Confirmar contraseña
+            </label>
+            <input
+              id="confirmPassword"
+              type="password"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
               required
               minLength={8}
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none ring-teal-600 transition focus:ring-2"
