@@ -174,11 +174,13 @@ async function getAuthenticatedContext(): Promise<AuthenticatedContext | NextRes
   if (!user) {
     return toErrorResponse("unauthorized", "Debes iniciar sesion para continuar.", 401);
   }
-  
+
   return { supabase, userId: user.id };
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  try {
+    
   const auth = await getAuthenticatedContext();
 
   if (auth instanceof NextResponse) {
@@ -203,7 +205,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     .eq("month_id", monthId)
     .maybeSingle<{ id: string }>();
 
-  if (existingSnapshotError) {
+    if (existingSnapshotError) {
+    console.error("Error checking existing snapshot:", existingSnapshotError.message);
     return toErrorResponse("snapshot_query_failed", "No pudimos validar tu snapshot actual.", 500);
   }
 
@@ -306,6 +309,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 
   return NextResponse.json(validation.data, { status: 200 });
+  } catch (error) {
+    console.error("Error processing snapshot request:", error);
+    return toErrorResponse("internal_server_error", "Ocurrió un error inesperado. Intenta nuevamente más tarde.", 500);
+  }
 }
 
 export async function GET(): Promise<NextResponse> {

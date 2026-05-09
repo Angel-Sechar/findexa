@@ -54,7 +54,7 @@ export default function RevealPage() {
 
       if (!response || !response.ok) {
         if (!cancelled) {
-          setErrorMessage("No pudimos cargar tu resultado. Reintentá en unos segundos.");
+          setErrorMessage("No pudimos cargar tu resultado. Reintentar en unos segundos.");
           setIsLoading(false);
         }
         return;
@@ -64,7 +64,7 @@ export default function RevealPage() {
 
       if (!payload.snapshot || typeof payload.snapshot.freedomIndex !== "number") {
         if (!cancelled) {
-          setErrorMessage("No pudimos cargar tu resultado. Reintentá en unos segundos.");
+          setErrorMessage("No pudimos cargar tu resultado. Reintentar en unos segundos.");
           setIsLoading(false);
         }
         return;
@@ -129,14 +129,14 @@ export default function RevealPage() {
     }
 
     if (snapshot.freedomIndex === 0) {
-      return "Aun no tenes activos. Ese es el primer paso.";
+      return "Aún no tenes activos. Ese es el primer paso.";
     }
 
     if (yearsToFreedom === null) {
-      return "A este ritmo, aun no podemos estimar en cuantos anios seras libre.";
+      return "A este ritmo, aún no podemos estimar en cuantos años seras libre.";
     }
 
-    return `A este ritmo, seras libre en ${yearsToFreedom} anios.`;
+    return `A este ritmo, seras libre en ${yearsToFreedom} años.`;
   }, [snapshot, yearsToFreedom]);
 
   if (isLoading) {

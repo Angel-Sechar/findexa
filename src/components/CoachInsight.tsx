@@ -9,7 +9,7 @@ type CoachInsightProps = {
 };
 
 const fallbackMessage =
-  "Tu coach financiero estara disponible pronto. Segui registrando tus datos para recibir mejores recomendaciones.";
+  "Tu coach financiero estará disponible pronto. Sigue registrando tus datos para recibir mejores recomendaciones.";
 
 export function CoachInsight({ snapshotId }: CoachInsightProps) {
   const [message, setMessage] = useState(fallbackMessage);

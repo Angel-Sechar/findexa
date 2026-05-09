@@ -10,12 +10,12 @@ export function FreedomIndex({ index, yearsToFreedom }: FreedomIndexProps) {
 
   return (
     <Card className="space-y-3">
-      <p className="text-sm font-medium text-[#0F6E56]">Indice de libertad financiera</p>
+      <p className="text-sm font-medium text-[#0F6E56]">Índice de libertad financiera</p>
 
       <div>
         <p className="text-3xl font-bold text-slate-900">Hoy eres {index}% libre.</p>
         {index < 100 && yearsToFreedom !== null ? (
-          <p className="mt-1 text-sm text-slate-600">Libre en {yearsToFreedom} anios</p>
+          <p className="mt-1 text-sm text-slate-600">Libre en {yearsToFreedom} años</p>
         ) : null}
       </div>
 

@@ -15,7 +15,7 @@ export function AssetsList({ assets, constants }: AssetsListProps) {
   if (assets.length === 0) {
     return (
       <Card>
-        <p className="text-sm text-slate-600">Aun no tienes activos registrados.</p>
+        <p className="text-sm text-slate-600">Aún no tienes activos registrados.</p>
       </Card>
     );
   }

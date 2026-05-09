@@ -42,7 +42,7 @@ export default function DashboardPage() {
 
       if (!response) {
         if (!cancelled) {
-          setErrorMessage("No pudimos cargar tu dashboard. Reintenta en unos segundos.");
+          setErrorMessage("No pudimos cargar tu dashboard. Reintentar en unos segundos.");
           setIsLoading(false);
         }
         return;
@@ -55,7 +55,7 @@ export default function DashboardPage() {
 
       if (!response.ok) {
         if (!cancelled) {
-          setErrorMessage("No pudimos cargar tu dashboard. Reintenta en unos segundos.");
+          setErrorMessage("No pudimos cargar tu dashboard. Reintentar en unos segundos.");
           setIsLoading(false);
         }
         return;
@@ -65,7 +65,7 @@ export default function DashboardPage() {
 
       if (!payload.snapshot || !payload.assets || !payload.liabilities || !payload.constants) {
         if (!cancelled) {
-          setErrorMessage("No pudimos cargar tu dashboard. Reintenta en unos segundos.");
+          setErrorMessage("No pudimos cargar tu dashboard. Reintentar en unos segundos.");
           setIsLoading(false);
         }
         return;
@@ -115,7 +115,7 @@ export default function DashboardPage() {
         <div className="mx-auto w-full max-w-md">
           <Card className="space-y-2">
             <h1 className="text-base font-semibold text-slate-900">No pudimos cargar tu dashboard</h1>
-            <p className="text-sm text-[#D85A30]">{errorMessage ?? "Ocurrio un error inesperado."}</p>
+            <p className="text-sm text-[#D85A30]">{errorMessage ?? "Ocurrió un error inesperado."}</p>
           </Card>
         </div>
       </main>
