@@ -51,8 +51,19 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   if (!user && isProtectedRoute(pathname)) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
-
+  
   if (user && PUBLIC_ONLY_ROUTES.has(pathname)) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("onboarding_completed")
+      .eq("id", user.id)
+      .single();
+
+    if (!profile?.onboarding_completed) {
+      return NextResponse.redirect(new URL("/onboarding", request.url));
+    }
+  }
+    if (user && PUBLIC_ONLY_ROUTES.has(pathname)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 

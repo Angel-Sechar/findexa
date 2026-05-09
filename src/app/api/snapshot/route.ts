@@ -174,7 +174,7 @@ async function getAuthenticatedContext(): Promise<AuthenticatedContext | NextRes
   if (!user) {
     return toErrorResponse("unauthorized", "Debes iniciar sesion para continuar.", 401);
   }
-
+  
   return { supabase, userId: user.id };
 }
 

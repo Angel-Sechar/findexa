@@ -26,24 +26,31 @@ function toErrorResponse(error: string, message: string, status: number): NextRe
 }
 
 export async function GET(): Promise<NextResponse> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("constant")
-    .select("id, value, label, shortened")
-    .order("id", { ascending: true })
-    .order("value", { ascending: true });
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("constant")
+      .select("id, value, label, shortened")
+      .order("id", { ascending: true })
+      .order("value", { ascending: true });
+    
+    const constants = (data ?? []) as Constant[];
+    const payload = { constants };
+    const validation = constantsResponseSchema.safeParse(payload);
 
-  if (error) {
+    if (error) {
+        console.log("Supabase error:", error);
+        return toErrorResponse("constants_fetch_failed", "No pudimos cargar las constantes.", 500);
+      }
+      if (!validation.success) {
+      return toErrorResponse("constants_shape_invalid", "La respuesta de constantes no es valida.", 500);
+      }
+
+    return NextResponse.json(validation.data, { status: 200 });
+    }
+    catch (err) {
+    console.log("CATCH ERROR:", err);
     return toErrorResponse("constants_fetch_failed", "No pudimos cargar las constantes.", 500);
-  }
-
-  const constants = (data ?? []) as Constant[];
-  const payload = { constants };
-  const validation = constantsResponseSchema.safeParse(payload);
-
-  if (!validation.success) {
-    return toErrorResponse("constants_shape_invalid", "La respuesta de constantes no es valida.", 500);
-  }
-
-  return NextResponse.json(validation.data, { status: 200 });
+    }
+ 
 }

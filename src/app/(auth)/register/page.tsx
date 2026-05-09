@@ -16,8 +16,7 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async () => {
     setError(null);
 
     if (name.trim().length < 2) {
@@ -64,7 +63,7 @@ export default function RegisterPage() {
         <h1 className="text-2xl font-semibold text-slate-900">Crear cuenta</h1>
         <p className="mt-2 text-sm text-slate-600">Comienza hoy a calcular tu libertad financiera.</p>
 
-        <form onSubmit={onSubmit} className="mt-6 space-y-4">
+        <form onSubmit={(e) => { e.preventDefault(); void onSubmit(); }} className="mt-6 space-y-4">
           <div>
             <label htmlFor="name" className="mb-1 block text-sm font-medium text-slate-700">
               Nombre

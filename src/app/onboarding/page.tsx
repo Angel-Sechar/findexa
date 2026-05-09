@@ -13,6 +13,7 @@ import type {
   SnapshotRequest,
   SnapshotResponse,
 } from "@/types/finances";
+import { createClient } from "@/lib/supabase/client";
 
 type ConstantsApiResponse = {
   constants: Constant[];
@@ -69,7 +70,7 @@ export default function OnboardingPage() {
 
       if (!payload.constants || !Array.isArray(payload.constants)) {
         if (!cancelled) {
-          setLoadError("No pudimos cargar los tipos. Reintentá en unos segundos.");
+          setLoadError("No pudimos cargar los tipos. Reintentar en unos segundos.");
           setIsLoadingConstants(false);
         }
         return;
@@ -89,10 +90,10 @@ export default function OnboardingPage() {
   }, []);
 
   const liabilityTypeOptions = useMemo(
-    () => constants.filter((constant) => constant.id === 104),
+    () => constants.filter((constant) => constant.id === 104 && constant.id !== constant.value),
     [constants],
   );
-  const assetTypeOptions = useMemo(() => constants.filter((constant) => constant.id === 103), [constants]);
+  const assetTypeOptions = useMemo(() => constants.filter((constant) => constant.id === 103 && constant.id !== constant.value), [constants]);
 
   const setStep = (step: OnboardingData["step"]) => setData((prev) => ({ ...prev, step }));
 
@@ -139,8 +140,9 @@ export default function OnboardingPage() {
     setSubmitError(null);
     setIsSubmitting(true);
 
+    try {
+      
     const payload = buildSnapshotPayload(data);
-
     const response = await fetch("/api/snapshot", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -149,7 +151,7 @@ export default function OnboardingPage() {
 
     if (!response || !response.ok) {
       setIsSubmitting(false);
-      setSubmitError("No pudimos calcular tu índice. Tocá reintentar.");
+      setSubmitError("No pudimos calcular tu índice. Reintentar.");
       return;
     }
 
@@ -162,7 +164,16 @@ export default function OnboardingPage() {
     }
 
     setIsSubmitting(false);
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      await supabase.from("profiles").update({ onboarding_completed: true }).eq("id", user.id);
+    }
     router.push("/reveal");
+
+    } catch (err) {
+      console.log("Error submitting snapshot:" );
+    }
   };
 
   if (isLoadingConstants) {
@@ -304,7 +315,7 @@ export default function OnboardingPage() {
 
   if (data.step === 3) {
     return (
-      <OnboardingStep step={3} title="¿Tenés deudas?" description="Podés agregarlas ahora o seguir sin deudas.">
+      <OnboardingStep step={3} title="¿Tienes deudas?" description="Puedes agregarlas ahora o seguir sin deudas.">
         <div className="space-y-4">
           {(data.liabilities ?? []).map((liability, index) => (
             <div key={`liability-${index}`} className="space-y-3 rounded-lg border border-slate-200 p-3">
@@ -349,7 +360,7 @@ export default function OnboardingPage() {
 
           <div className="grid gap-2 sm:grid-cols-2">
             <Button variant="secondary" fullWidth onClick={addLiability} type="button">
-              + Agregar otra deuda
+              + Agregar deuda
             </Button>
             <Button
               fullWidth
@@ -424,7 +435,7 @@ export default function OnboardingPage() {
 
           <div className="grid gap-2 sm:grid-cols-2">
             <Button variant="secondary" fullWidth onClick={addAsset} type="button">
-              + Agregar otro activo
+              + Agregar activo
             </Button>
             <Button
               fullWidth

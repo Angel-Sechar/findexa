@@ -28,29 +28,15 @@ export default function LoginPage() {
 
     if (signInError || !data.user) {
       setIsSubmitting(false);
-      setError("Tus credenciales no son validas.");
+      if (signInError?.message === "Email not confirmed") {
+        setError("Debes confirmar tu correo antes de ingresar. Revisa tu bandeja de entrada.");
+      } else {
+      setError("Tus credenciales no son válidas.");
+      }
       return;
     }
 
-    const { data: profile, error: profileError } = await supabase
-      .from("profiles")
-      .select("onboarding_completed")
-      .eq("id", data.user.id)
-      .single<ProfileStatus>();
-
-    setIsSubmitting(false);
-
-    if (profileError) {
-      setError("No pudimos cargar tu perfil. Intentalo de nuevo.");
-      return;
-    }
-
-    if (profile?.onboarding_completed) {
-      router.push("/dashboard");
-      return;
-    }
-
-    router.push("/onboarding");
+    router.push('/onboarding');
   };
 
   return (
@@ -59,7 +45,7 @@ export default function LoginPage() {
         <h1 className="text-2xl font-semibold text-slate-900">Iniciar sesion</h1>
         <p className="mt-2 text-sm text-slate-600">Vuelve a tu balance y sigue construyendo tu libertad financiera.</p>
 
-        <form onSubmit={onSubmit} className="mt-6 space-y-4">
+        <form onSubmit={(e) => { e.preventDefault(); void onSubmit(); }} className="mt-6 space-y-4">
           <div>
             <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-700">
               Correo
